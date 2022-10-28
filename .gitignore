@@ -9,4 +9,8 @@
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints
 # Jetbrains
+Data Structures and Algorithms.iml
 .idea
+out
+# Microsoft Visual Studio Code
+.vscode
