@@ -1,6 +1,6 @@
 class ListNode:
-    def __init__(self, value, next=None):
-        self.value = value
+    def __init__(self, data, next=None):
+        self.value = data
         self.next = next
 
 
@@ -8,16 +8,16 @@ class LinkedList:
     def __init__(self, head=None):
         self.head = head
 
-    def insert(self, index, value):
+    def insert(self, index, data):
         if self.head is None:
-            self.head = ListNode(value)
+            self.head = ListNode(data)
         elif index == 0:
             current = self.head
-            new_node = ListNode(value)
+            new_node = ListNode(data)
             new_node.next = current
             self.head = new_node
         else:
-            new_node = ListNode(value)
+            new_node = ListNode(data)
             i = 0
             current = self.head
             while i != (index - 1) and current is not None:
@@ -28,17 +28,17 @@ class LinkedList:
             new_node.next = current.next
             current.next = new_node
 
-    def append(self, value):
+    def append(self, data):
         if self.head is None:
-            self.head = ListNode(value)
+            self.head = ListNode(data)
         else:
             current = self.head
-            new_node = ListNode(value)
+            new_node = ListNode(data)
             while current.next is not None:
                 current = current.next
             current.next = new_node
 
-    def delete(self, value):
+    def delete(self, data):
         if self.head is None:
             print("Linked List is empty! Cannot delete node from an empty linked list.")
         elif self.head.next is None:
@@ -46,32 +46,32 @@ class LinkedList:
             self.head = None
         else:
             current = self.head
-            if current.value == value:
+            if current.value == data:
                 self.head = self.head.next
                 current.next = None
             else:
-                while current.next is not None and current.next.value != value:
+                while current.next is not None and current.next.value != data:
                     current = current.next
                 if current.next is None:
-                    print(f"Linked List does not contain any node of value {value}")
+                    print(f"Linked List does not contain any node of value {data}")
                 else:
                     delete_node = current.next
                     current.next = delete_node.next
                     delete_node.next = None
 
-    def search(self, value):
-        if self.head.value == value:
-            print(f"Value {value} is found at index 0")
+    def search(self, data):
+        if self.head.value == data:
+            print(f"Value {data} is found at index 0")
         else:
             current = self.head
             i = 0
-            while current is not None and current.value != value:
+            while current is not None and current.value != data:
                 current = current.next
                 i += 1
             if current is None:
-                print(f"Linked List does not contain any node of value {value}")
+                print(f"Linked List does not contain any node of value {data}")
             else:
-                print(f"Value {value} is found at index {i}")
+                print(f"Value {data} is found at index {i}")
     
     def length(self):
         if self.head is None:
@@ -118,8 +118,8 @@ if __name__ == "__main__":
 
         if choice == '1':
             value = input("Enter value for node: ")
-            index = int(input("Enter index of insertion: "))
-            linkedList.insert(index, value)
+            position = int(input("Enter index of insertion: "))
+            linkedList.insert(position, value)
         elif choice == '2':
             value = input("Enter value for node: ")
             linkedList.append(value)
