@@ -14,8 +14,8 @@ class BinarySearchTree:
         if self.root is None:
             self.root = new_node
         else:
-            current = self.root
             parent = None
+            current = self.root
             while current is not None:
                 parent = current
                 if data < current.data:
@@ -99,6 +99,9 @@ class BinarySearchTree:
         self.__traverse_inorder(tree)
 
     def __traverse_preorder(self, tree: TreeNode) -> None:
+        if self.root is None:
+            print("Tree is empty! Can't traverse an empty tree.")
+            return
         if tree is not None:
             print(tree.data, end="  ")
             self.__traverse_preorder(tree.left)
@@ -109,6 +112,9 @@ class BinarySearchTree:
         self.__traverse_preorder(tree)
 
     def __traverse_postorder(self, tree: TreeNode) -> None:
+        if self.root is None:
+            print("Tree is empty! Can't traverse an empty tree.")
+            return
         if tree is not None:
             self.__traverse_postorder(tree.left)
             self.__traverse_postorder(tree.right)
@@ -117,6 +123,69 @@ class BinarySearchTree:
     def postorder_traversal(self) -> None:
         tree = self.root
         self.__traverse_postorder(tree)
+
+    def breadth_first_traversal(self):
+        if self.root is None:
+            print("Tree is empty! Can't traverse an empty tree.")
+            return
+
+        queue = [self.root]
+        while len(queue) != 0:
+            current = queue.pop(0)
+            print(current.data, end="  ")
+            if current.left is not None:
+                queue.append(current.left)
+            if current.right is not None:
+                queue.append(current.right)
+
+    def depth_first_traversal(self, traversal: str) -> None:
+        if self.root is None:
+            print("Tree is empty! Can't traverse an empty tree.")
+            return
+
+        if traversal == 'inorder':
+            stack = []
+            current = self.root
+            while True:
+                if current is not None:
+                    stack.insert(0, current)
+                    current = current.left
+                elif len(stack) != 0:
+                    current = stack.pop(0)
+                    print(current.data, end="  ")
+                    current = current.right
+                else:
+                    break
+
+        elif traversal == 'preorder':
+            stack = [self.root]
+            while len(stack) != 0:
+                current = stack.pop(0)
+                print(current.data, end="  ")
+                if current.right is not None:
+                    stack.insert(0, current.right)
+                if current.left is not None:
+                    stack.insert(0, current.left)
+
+        elif traversal == 'postorder':
+            stack = []
+            current = self.root
+            while True:
+                while current is not None:
+                    if current.right is not None:
+                        stack.insert(0, current.right)
+                    stack.insert(0, current)
+                    current = current.left
+                current = stack.pop(0)
+                if current.right is not None and (len(stack) > 0 and stack[0] == current.right):
+                    stack.pop(0)
+                    stack.insert(0, current)
+                    current = current.right
+                else:
+                    print(current.data, end="  ")
+                    current = None
+                if len(stack) == 0:
+                    break
 
 
 if __name__ == "__main__":
@@ -128,9 +197,15 @@ if __name__ == "__main__":
         print("=========================================================")
         print("1) Insert Node")
         print("2) Delete Node")
-        print("3) Inorder Traversal")
-        print("4) Preorder Traversal")
-        print("5) Postorder Traversal")
+        print("3) Inorder Traversal using Recursion")
+        print("4) Preorder Traversal using Recursion")
+        print("5) Postorder Traversal using Recursion")
+        print("6) Breadth-first or Level Order Traversal")
+        print("7) Depth-first Traversal ----")
+        print("\t i)   Inorder Traversal")
+        print("\t ii)  Preorder Traversal")
+        print("\t iii) Postorder Traversal")
+        print()
         print("Type 'q' to quit the program.")
         print()
 
@@ -157,6 +232,24 @@ if __name__ == "__main__":
             print("Postorder traversal of binary search tree is as follows:")
             binary_search_tree.postorder_traversal()
             print()
+        elif choice == '6':
+            print("Breadth-first traversal of binary search tree is as follows:")
+            binary_search_tree.breadth_first_traversal()
+            print()
+        elif choice == '7':
+            choose = input("Which depth-first traversal do you want to perform: ")
+            if choose == 'i':
+                print("Inorder traversal of binary search tree is as follows:")
+                binary_search_tree.depth_first_traversal('inorder')
+                print()
+            elif choose == 'ii':
+                print("Preorder traversal of binary search tree is as follows:")
+                binary_search_tree.depth_first_traversal('preorder')
+                print()
+            elif choose == 'iii':
+                print("Postorder traversal of binary search tree is as follows:")
+                binary_search_tree.depth_first_traversal('postorder')
+                print()
         elif choice == 'q' or choice == 'Q':
             print("USER PROMPTED TO QUIT THE PROGRAM...")
             break
