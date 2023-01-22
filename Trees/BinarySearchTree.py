@@ -1,5 +1,5 @@
 class TreeNode:
-    def __init__(self, data: int, left=None, right=None) -> None:
+    def __init__(self, data, left=None, right=None) -> None:
         self.data = data
         self.left = left
         self.right = right
@@ -9,7 +9,7 @@ class BinarySearchTree:
     def __init__(self, root=None) -> None:
         self.root = root
 
-    def insert_node(self, data: int) -> None:
+    def insert_node(self, data) -> None:
         new_node = TreeNode(data)
         if self.root is None:
             self.root = new_node
@@ -41,7 +41,7 @@ class BinarySearchTree:
             maximum = maximum.right
         return maximum
 
-    def delete_node(self, data: int) -> None:
+    def delete_node(self, data) -> None:
         if self.root is None:
             print("Tree is empty! Can't delete node from an empty tree.")
             return
@@ -213,11 +213,21 @@ if __name__ == "__main__":
         print()
 
         if choice == '1':
-            value = int(input("Enter value to be inserted in binary search tree: "))
+            value = input("Enter value to be inserted in binary search tree: ")
+            try:
+                int(value)
+                value = int(value)
+            except ValueError:
+                value = value
             binary_search_tree.insert_node(value)
             print(f"{value} is successfully inserted.")
         elif choice == '2':
-            value = int(input("Enter value to be deleted from binary search tree: "))
+            value = input("Enter value to be deleted from binary search tree: ")
+            try:
+                int(value)
+                value = int(value)
+            except ValueError:
+                value = value
             binary_search_tree.delete_node(value)
             print(f"Node with data {value} is successfully deleted.")
         elif choice == '3':

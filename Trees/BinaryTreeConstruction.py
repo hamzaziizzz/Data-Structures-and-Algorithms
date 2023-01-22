@@ -117,6 +117,13 @@ if __name__ == "__main__":
             inorder_traversal = input("\nEnter inorder traversal of binary tree (seperated by a comma):\n")
             inorder_traversal = list(inorder_traversal.split(', '))
 
+            try:
+                inorder_traversal = [int(x) for x in inorder_traversal]
+                preorder_traversal = [int(x) for x in preorder_traversal]
+            except ValueError:
+                inorder_traversal = inorder_traversal
+                preorder_traversal = preorder_traversal
+
             binary_tree.root = binary_tree.construct_binary_tree(preorder=preorder_traversal, inorder=inorder_traversal)
 
             print("\nPostorder traversal of binary tree is as follows:")
@@ -130,6 +137,13 @@ if __name__ == "__main__":
             inorder_traversal = input("\nEnter inorder traversal of binary tree (seperated by a comma):\n")
             inorder_traversal = list(inorder_traversal.split(', '))
 
+            try:
+                inorder_traversal = [int(x) for x in inorder_traversal]
+                postorder_traversal = [int(x) for x in postorder_traversal]
+            except ValueError:
+                inorder_traversal = inorder_traversal
+                postorder_traversal = postorder_traversal
+
             binary_tree.root = binary_tree.construct_binary_tree(postorder=postorder_traversal, inorder=inorder_traversal)
 
             print("\nPreorder traversal of binary tree is as follows:")
@@ -142,6 +156,13 @@ if __name__ == "__main__":
 
             preorder_traversal = input("\nEnter preorder traversal of binary tree (seperated by a comma):\n")
             preorder_traversal = list(preorder_traversal.split(', '))
+
+            try:
+                postorder_traversal = [int(x) for x in postorder_traversal]
+                preorder_traversal = [int(x) for x in preorder_traversal]
+            except ValueError:
+                postorder_traversal = postorder_traversal
+                preorder_traversal = preorder_traversal
 
             binary_tree.root = binary_tree.construct_binary_tree(postorder=postorder_traversal, preorder=preorder_traversal)
 
